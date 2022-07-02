@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -12,14 +13,14 @@
 	<c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 	<div class="container mt-3">
+	<security:authorize access="hasRole('ADMIN')">
 	  <h2>Cadastramento de endereco</h2>
 		
 		<form action="/endereco" method="get">
 			<label>Endereco:</label>
 		  	<button type="submit" class="btn btn-primary">Novo</button>
 	  </form>
-
-
+	  </security:authorize>
 
 	<c:if test="${not empty lista}">		
 		<h2>Total de endereco: ${lista.size()}</h2>
@@ -34,7 +35,9 @@
 		        <th>bairro</th>
 		        <th>localidade</th>
 		        <th>uf</th>
+		        <security:authorize access="hasRole('ADMIN')">
         		<th></th>
+        		</security:authorize>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -47,7 +50,9 @@
 			        <td>${e.bairro}</td>
 			        <td>${e.localidade}</td>
 			        <td>${e.uf}</td>
+			        <security:authorize access="hasRole('ADMIN')">
 			        <td><a href="/endereco/${e.id}/excluir">excluir</a> </td>
+			        </security:authorize>
 			      </tr>
 		      </c:forEach>		      
 		    </tbody>
