@@ -5,14 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name = "TRole"
-	, uniqueConstraints = @UniqueConstraint(columnNames = { "nome" })
-)
+@Table(name = "TRole")
 public class Role implements GrantedAuthority{
 	/**
 	 * 
@@ -23,17 +20,18 @@ public class Role implements GrantedAuthority{
 	private Integer id;
 	private String nome;
 
+	public Role(String nome) {
+		this.setNome(nome);
+	}
+	
+	public Role(Integer id) {
+		this.setId(id);
+	}
+	
 	public Role() {
 
 	}
 
-	public Role(Integer id) {
-		this.setId(id);
-	}
-
-	public Role(String Nome) {
-		this.setNome(nome);
-	}
 
 	public Integer getId() {
 		return id;
@@ -49,6 +47,10 @@ public class Role implements GrantedAuthority{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

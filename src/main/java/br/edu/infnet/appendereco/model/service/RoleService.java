@@ -25,4 +25,5 @@ public class RoleService {
 		return roleRepository.findByNome(nome);
 		
 	}
+
 }

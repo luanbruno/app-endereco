@@ -17,65 +17,67 @@ import br.edu.infnet.appendereco.model.service.UsuarioService;
 public class UsuarioLoader implements ApplicationRunner{
 
 	@Autowired
-	private UsuarioService usuarioService;
-	
-	@Autowired
 	private RoleService roleService;
-	
-	
+
+	@Autowired
+	private UsuarioService usuarioService;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
-		roleService.incluir(new Role("ROLE_ADMIN"));
-		roleService.incluir(new Role("ROLE_USER"));
-		
-		Endereco enderecoElberth = new Endereco();
-		enderecoElberth.setBairro("bairro elberth");
-		enderecoElberth.setCep("cep elberth");
-		enderecoElberth.setComplemento("complemento elberth");
-		enderecoElberth.setLocalidade("localidade elberth");
-		enderecoElberth.setLogradouro("logradouro elberth");
-		enderecoElberth.setUf("uf elberth");
-		
+		if (roleService.obterPornome("ROLE_ADMIN") == null) {
+			roleService.incluir(new Role("ROLE_ADMIN"));
+		}
 
-		Usuario elberth = new Usuario();
-		elberth.setEmail("elberth@elberth.com");
-		elberth.setEndereco(enderecoElberth);
-		elberth.setNome("Elberth");
-		elberth.setRoles(Arrays.asList(new Role(1)));
-		elberth.setSenha("123");
+		if (roleService.obterPornome("ROLE_USER") == null) {
+			roleService.incluir(new Role("ROLE_USER"));
+		}
 		
+		Endereco enderecoA = new Endereco();
+		enderecoA.setBairro("bairro luan");
+		enderecoA.setCep("26857874");
+		enderecoA.setComplemento("complemento luan");
+		enderecoA.setLocalidade("localidade luan");
+		enderecoA.setLogradouro("logradouro luan");
+		enderecoA.setUf("uf luan");
 		
-		usuarioService.incluir(elberth);
+		Usuario usuarioA = new Usuario();
+		usuarioA.setEmail("admin@infnet.edu.br");
+		usuarioA.setEndereco(enderecoA);
+		usuarioA.setNome("luan");
+		usuarioA.setRoles(Arrays.asList(new Role(1)));
+		usuarioA.setSenha("123");
+				
+		usuarioService.incluir(usuarioA);
 		
-		Endereco enderecoElis = new Endereco();
-		enderecoElis.setBairro("bairro elis");
-		enderecoElis.setCep("cep elis");
-		enderecoElis.setComplemento("complemento elis");
-		enderecoElis.setLocalidade("localidade elis");
-		enderecoElis.setLogradouro("logradouro elis");
-		enderecoElis.setUf("uf elis");
+		Endereco enderecoB = new Endereco();
+		enderecoB.setBairro("bairro elis");
+		enderecoB.setCep("cep elis");
+		enderecoB.setComplemento("complemento elis");
+		enderecoB.setLocalidade("localidade elis");
+		enderecoB.setLogradouro("logradouro elis");
+		enderecoB.setUf("uf elis");
 		
-		Usuario elis = new Usuario();
-		elis.setEmail("elis@elis.com");
-		elis.setEndereco(enderecoElis);
-		elis.setNome("Elis");
-		elis.setRoles(Arrays.asList(new Role(2)));
-		elis.setSenha("123");
+		Usuario usuarioB = new Usuario();
+		usuarioB.setEmail("elis@elis.com");
+		usuarioB.setEndereco(enderecoB);
+		usuarioB.setNome("Elis");
+		usuarioB.setRoles(Arrays.asList(new Role(2)));
+		usuarioB.setSenha("123");
 
-		usuarioService.incluir(elis);
+		usuarioService.incluir(usuarioB);
 		
-		Endereco enderecoMoraes = new Endereco();
-		enderecoMoraes.setBairro("bairro Moraes");
-		enderecoMoraes.setCep("cep Moraes");
-		enderecoMoraes.setComplemento("complemento Moraes");
-		enderecoMoraes.setLocalidade("localidade Moraes");
-		enderecoMoraes.setLogradouro("logradouro Moraes");
-		enderecoMoraes.setUf("uf Moraes");
+		Endereco enderecoC = new Endereco();
+		enderecoC.setBairro("bairro Moraes");
+		enderecoC.setCep("cep Moraes");
+		enderecoC.setComplemento("complemento Moraes");
+		enderecoC.setLocalidade("localidade Moraes");
+		enderecoC.setLogradouro("logradouro Moraes");
+		enderecoC.setUf("uf Moraes");
 		
 		Usuario moraes = new Usuario();
 		moraes.setEmail("moraes@moraes.com");
-		moraes.setEndereco(enderecoMoraes);
+		moraes.setEndereco(enderecoC);
 		moraes.setNome("Moraes");
 		moraes.setRoles(Arrays.asList(new Role(1), new Role(2)));
 		moraes.setSenha("123");
